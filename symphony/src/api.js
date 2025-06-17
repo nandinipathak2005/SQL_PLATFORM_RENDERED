@@ -1,5 +1,6 @@
 export const fetchCharacters = async () => {
-  const res = await fetch('http://localhost:3001/api/characters');
+  //const res = await fetch('http://localhost:3001/api/characters');
+  const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/characters`);
   if (!res.ok) throw new Error('Failed to fetch characters');
   return await res.json();
 };
@@ -11,24 +12,32 @@ export const fetchCharacters = async () => {
 // };
 
 export const fetchPuzzle = async (puzzleId) => {
-  const res = await fetch(`http://localhost:3001/api/puzzles/${puzzleId}`);
+ // const res = await fetch(`http://localhost:3001/api/puzzles/${puzzleId}`);
+ const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/puzzles/${puzzleId}`);
+
   if (!res.ok) throw new Error('Failed to fetch puzzle');
   return await res.json();
 };
 export const fetchPuzzleStage2 = async (puzzleId) => {
-  const res = await fetch(`http://localhost:3001/api/puzzles2/${puzzleId}`);
+  //const res = await fetch(`http://localhost:3001/api/puzzles2/${puzzleId}`);
+  const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/puzzles2/${puzzleId}`);
+
   if (!res.ok) throw new Error('Failed to fetch puzzle');
   return await res.json();
 };
 
 export const fetchBranch = async (branchId) => {
-  const res = await fetch(`http://localhost:3001/api/puzzles/branch/${branchId}`);
+  //const res = await fetch(`http://localhost:3001/api/puzzles/branch/${branchId}`);
+  const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/puzzles/branch/${branchId}`);
+
   if (!res.ok) throw new Error('Failed to fetch branch');
   return await res.json();
 };
 
 export const fetchBranchStage2 = async (branchId) => {
-  const res = await fetch(`http://localhost:3001/api/puzzles2/branch/${branchId}`);
+  //const res = await fetch(`http://localhost:3001/api/puzzles2/branch/${branchId}`);
+  const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/puzzles2/branch/${branchId}`);
+
   if (!res.ok) throw new Error('Failed to fetch branch');
   return await res.json();
 };
@@ -106,7 +115,7 @@ export const executeQuery = async (query, payload) => {
     throw new Error("User not logged in");
   }
 
-  const res = await fetch('http://localhost:3001/api/query/execute', {
+  const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/query/execute`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -144,7 +153,7 @@ export const executeQuery2 = async (query, payload) => {
     console.error("User is not logged in or user info is missing in localStorage");
     throw new Error("User not logged in");
   }
-  const res = await fetch('http://localhost:3001/api/query2/execute', {
+  const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/query2/execute`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -174,7 +183,8 @@ export const updatePuzzle = async (puzzleId) => {
   return Promise.resolve();
 };
 
-const API_BASE = 'http://localhost:3001/api/auth';
+//const API_BASE = 'http://localhost:3001/api/auth';
+const API_BASE = `${import.meta.env.VITE_BACKEND_URL}/api/auth`;
 
 export const login = async (username, password) => {
   const res = await fetch(`${API_BASE}/login`, {
